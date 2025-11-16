@@ -14,13 +14,19 @@ builder.Services.AddCors(options =>
        });
 });
 
- // Add services to the container.
- builder.Services.AddControllers();
-
-builder.Services.AddControllers();
+// Add services to the container.
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+    })
+    .ConfigureApiBehaviorOptions(options =>
+    {
+        // Disable automatic 400 response so we can return 422 for validation errors
+        options.SuppressModelStateInvalidFilter = true;
+    });
 builder.Services.AddDbContext<DataContext>();
 
-builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
