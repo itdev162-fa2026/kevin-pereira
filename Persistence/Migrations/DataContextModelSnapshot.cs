@@ -36,6 +36,12 @@ namespace Persistence.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("StripePaymentIntentId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("StripeSessionId")
+                        .HasColumnType("TEXT");
+
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("TEXT");
 
